@@ -1,0 +1,46 @@
+{
+  "servicePointsExpandedUser" : {
+    "type": "object",
+    "description": "Service points expanded user",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Id"
+      },
+      "userId": {
+        "type": "string",
+        "description": "User Id"
+      },
+      "servicePointsIds": {
+        "type": "array",
+        "description": "Service Points Ids",
+        "items": {
+          "type": "string"
+        }
+      },
+      "servicePoints": {
+        "type": "array",
+        "description": "Service Points",
+        "items": {
+          "$ref": "servicepoint.json#/servicePoint"
+        }
+      },
+      "defaultServicePointId": {
+        "type": "string",
+        "description": "Default Service Point Id"
+      },
+      "defaultServicePoint": {
+        "description": "Default Service Point Object",
+        "$ref": "servicepoint.json#/servicePoint"
+      },
+      "metadata": {
+        "$ref": "metadata.json#/metadata",
+        "readonly": true
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "userId"
+    ]
+  }
+}

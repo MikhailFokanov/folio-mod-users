@@ -1,0 +1,13 @@
+{
+  "generateLinkResponse": {
+    "type": "object",
+    "description": "Response for reset password link generation",
+    "properties": {
+      "link": {
+        "type": "string",
+        "description": "Link for resetting password"
+      }
+    },
+    "additionalProperties": false
+  }
+}

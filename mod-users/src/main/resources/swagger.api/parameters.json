@@ -1,0 +1,17 @@
+{
+  "parameters" : {
+    "description": "List of key/value parameters of an error",
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "errors": {
+    "description": "A set of errors",
+    "type": "object",
+    "properties": {
+      "errors": {
+        "description": "List of errors",
+        "id": "errors",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "$ref": "error.json#/error"
+        }
+      },
+      "total_records": {
+        "description": "Total number of errors",
+        "type": "integer"
+      }
+    }
+  }
+}

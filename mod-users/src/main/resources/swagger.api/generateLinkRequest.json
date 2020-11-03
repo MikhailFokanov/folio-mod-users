@@ -1,0 +1,15 @@
+{
+  "generateLinkRequest": {
+    "type": "object",
+    "description": "Request to generate and send reset password link",
+    "properties": {
+      "userId": {
+        "type": "string",
+        "description": "Id of user to whom a reset password link is sent"
+      }
+    },
+    "required": [
+      "userId"
+    ]
+  }
+}

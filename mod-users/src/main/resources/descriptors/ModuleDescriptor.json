@@ -1,0 +1,75 @@
+{
+  "id": "mod-users-nh-0.0.1-SNAPSHOT",
+  "name": "users PoC NH",
+  "provides": [
+    {
+      "id": "users-poc",
+      "version": "1.0",
+      "handlers": [
+        {
+          "methods": ["GET"],
+          "pathPattern": "/users-poc/users",
+          "permissionsRequired": [],
+          "modulePermissions": [
+            "users.collection.get",
+            "inventory-storage.service-points-users.collection.get",
+            "inventory-storage.service-points-users.item.get",
+            "inventory-storage.service-points.collection.get",
+            "inventory-storage.service-points.item.get"
+          ]
+        }
+      ]
+    }
+  ],
+  "requires" : [
+    {
+      "id" : "permissions",
+      "version" : "5.2"
+    },
+    {
+      "id" : "login",
+      "version" : "6.0"
+    }
+  ],
+  "permissionSets": [
+    {
+      "permissionName": "users-bl.collection.get",
+      "displayName" : "users-bl collection get",
+      "description" : "Get a list of composite user records"
+    },
+    {
+      "permissionName" : "users-bl.item.get",
+      "displayName" : "users-bl item get",
+      "description" : "Get a single composite user record by id"
+    },
+    {
+      "permissionName" : "users-bl.item.post",
+      "displayName" : "users-bl item post",
+      "description" : "Create a new composite user record"
+    },
+    {
+      "permissionName" : "users-bl.item.put",
+      "displayName" : "users-bl item put",
+      "description" : "Modify a composite user record"
+    },
+    {
+      "permissionName" : "users-bl.all",
+      "displayName" : "users-bl all",
+      "description" : "All user business-logic permissions",
+      "subPermissions" : [
+        "users-bl.collection.get",
+        "users-bl.item.get",
+        "users-bl.item.post",
+        "users-bl.item.put"
+      ],
+      "visible" : false
+    }
+  ],
+  "launchDescriptor": {
+    "dockerImage": "mod-users-nh:0.0.1-SNAPSHOT",
+    "dockerArgs": {
+      "HostConfig": { "PortBindings": { "8080/tcp":  [{ "HostPort": "%p" }] } }
+    },
+    "dockerPull" : false
+  }
+}

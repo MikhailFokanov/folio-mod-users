@@ -1,0 +1,29 @@
+{
+  "compositeUserListObject": {
+    "type": "object",
+    "description": "User List object",
+    "properties": {
+      "compositeUsers": {
+        "type": "array",
+        "id": "compositeUserList",
+        "description": "Users array",
+        "items": {
+          "$ref": "compositeUser.json#/compositeUser"
+        }
+      },
+      "totalResults": {
+        "type": "integer",
+        "description": "Total results amount"
+      },
+      "recordCount": {
+        "type": "integer",
+        "description": "Record count"
+      }
+    },
+    "required": [
+      "compositeUsers",
+      "totalResults",
+      "recordCount"
+    ]
+  }
+}

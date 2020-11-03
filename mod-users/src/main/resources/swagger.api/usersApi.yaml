@@ -1,0 +1,257 @@
+swagger: '2.0' #version of Swagger
+info: # High Level information of API
+  description: Users Swagger API #Give the description of API
+  version: 1.0.0 #API version
+  title: Swagger Users # API title
+  license: #Swagger license info
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: localhost # Host Name
+basePath: / #Basepath when there are multiple versions of API running
+tags: # Tag information for each API operation. Multiple tags for multiple API operation
+  - name: user #Tag name
+    description: Everything about your Users #Tag description of API operation
+schemes:
+  - http #security schemes
+paths:
+  /users:
+    get: #Request method type, GET,POST etc.
+      description: Retrieve a list of Users
+      operationId: getUsers #Method name
+      produces:
+        - application/json #Response content type
+      parameters:
+        - in: query
+          name: query
+          description: |
+            A query expressed as a CQL string
+            (see [dev.folio.org/reference/glossary#cql](https://dev.folio.org/reference/glossary#cql))
+            using valid searchable fields.
+            The first example below shows the general form of a full CQL query,
+            but those fields might not be relevant in this context.
+          required: false
+          type: string
+        - in: query
+          name: offset
+          description: Skip over a number of elements by specifying an offset value for the query
+          type: integer
+          required: false
+          default: 0
+          minimum: 0
+          maximum: 2147483647
+        - in: query
+          name: limit
+          description: Limit the number of elements returned in the response
+          type: integer
+          required: false
+          default: 10
+          minimum: 0
+          maximum: 2147483647
+        - in: query
+          name: orderBy
+          description: Order by fields
+          type: string
+          required: false
+        - in: query
+          name: order
+          description: Order
+          enum:
+            - [desc, asc]
+          default: desc
+          type: string
+          required: false
+        - in: query
+          name: lang
+          description: Requested language. Optional. [lang=en]
+          default: en
+          type: string
+          required: false
+          pattern: "[a-zA-Z]{2}"
+        - in: query
+          name: facets
+          description: facets to return in the collection result set, can be suffixed by a count of facet values to return, for example, patronGroup:10
+            default to top 5 facet values
+          type: array
+          items:
+            type: string
+          required: false
+      responses: # API response
+        '200': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "userdataCollection.json#/userdataCollection"
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '401':
+          description: "Not authorized to perform requested action"
+          schema:
+            type: string
+            example: "Not authorized to perform requested action"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+
+    post:
+      description: Create users
+      operationId: postUsers #Method name
+      produces:
+        - application/json #Response content type
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: userdata
+          description: Data for login
+          schema:
+            $ref: "userdata.json#/user"
+        - in: query
+          name: lang
+          description: Requested language. Optional. [lang=en]
+          default: en
+          type: string
+          required: false
+          pattern: "[a-zA-Z]{2}"
+      responses: # API response
+        '200': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "userdata.json#/user"
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '401':
+          description: "Not authorized to perform requested action"
+          schema:
+            type: string
+            example: "Not authorized to perform requested action"
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: "errors.json#/errors"
+            example: "Unprocessable Entity"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+
+  /users/{userId}:
+    get: #Request method type, GET,POST etc.
+      description: Get a single user
+      operationId: getUsersByUserId #Method name
+      produces:
+        - application/json #Response content type
+      parameters:
+        - in: path #path variable
+          name: userId #Input parameter
+          description: Id field of User #description of parameter
+          required: true #Is mandatory
+          type: string #data type-
+        - in: query
+          name: lang
+          description: Requested language. Optional. [lang=en]
+          default: en
+          type: string
+          required: false
+          pattern: "[a-zA-Z]{2}"
+      responses: # API response
+        '200': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "userdata.json#/user"
+        '404':
+          description: "Item with a given ID not found"
+          schema:
+            type: string
+            example: "Item with a given ID not found"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+    delete:
+      description: Delete a single user
+      operationId: deleteUsersByUserId #Method name
+      produces:
+        - application/json #Response content type
+      parameters:
+        - in: path #path variable
+          name: userId #Input parameter
+          description: Id field of User #description of parameter
+          required: true #Is mandatory
+          type: string #data type-
+        - in: query
+          name: lang
+          description: Requested language. Optional. [lang=en]
+          default: en
+          type: string
+          required: false
+          pattern: "[a-zA-Z]{2}"
+      responses: # API response
+        '204':
+          description: "Item deleted successfully"
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '404':
+          description: "Item with a given ID not found"
+          schema:
+            type: string
+            example: "Item with a given ID not found"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+    put:
+      description: Update a single user
+      operationId: putUsersByUserId #Method name
+      produces:
+        - application/json #Response content type
+      consumes:
+        - application/json
+      parameters:
+        - in: path #path variable
+          name: userId #Input parameter
+          description: Id field of User #description of parameter
+          required: true #Is mandatory
+          type: string #data type-
+        - in: body
+          name: userdataCollection
+          description: Data for login
+          schema:
+            $ref: "userdata.json#/user"
+        - in: query
+          name: lang
+          description: Requested language. Optional. [lang=en]
+          default: en
+          type: string
+          required: false
+          pattern: "[a-zA-Z]{2}"
+      responses: # API response
+        '204':
+          description: "Item successfully updated"
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '404':
+          description: "Item with a given ID not found"
+          schema:
+            type: string
+            example: "Item with a given ID not found"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"

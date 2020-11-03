@@ -1,0 +1,28 @@
+{
+  "permissionUser" : {
+    "type": "object",
+    "description": "Permission User Object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Id"
+      },
+      "userId": {
+        "type": "string",
+        "description": "User Id"
+      },
+      "permissions": {
+        "type": "array",
+        "description": "Permissions array",
+        "items": {
+          "type": "object"
+        }
+      },
+      "metadata": {
+        "$ref": "metadata.json#/metadata",
+        "readonly": true
+      }
+    },
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "user" : {
+    "title": "User Schema",
+    "description": "User schema",
+    "type": "object",
+    "properties": {
+      "username": {
+        "type": "string",
+        "description": "Username"
+      },
+      "id": {
+        "type": "string",
+        "description": "id"
+      },
+      "externalSystemId": {
+        "type": "string",
+        "description": "External system id"
+      },
+      "barcode": {
+        "type": "string",
+        "description": "Barcode"
+      },
+      "active": {
+        "type": "boolean",
+        "description": "Is active"
+      },
+      "type": {
+        "type": "string",
+        "description": "User type"
+      },
+      "patronGroup": {
+        "type": "string",
+        "description": "User patron group"
+      },
+      "meta": {
+        "type": "object",
+        "description": "Metadata object"
+      },
+      "proxyFor": {
+        "description" : "Deprecated",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "personal": {
+        "type": "object",
+        "description": "Personal user data",
+        "properties": {
+          "lastName": {
+            "type": "string",
+            "description": "Last name"
+          },
+          "firstName": {
+            "type": "string",
+            "description": "First name"
+          },
+          "middleName": {
+            "type": "string",
+            "description": "Middle name"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone"
+          },
+          "mobilePhone": {
+            "type": "string",
+            "description": "Mobile phone"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of birth"
+          },
+          "addresses": {
+            "type": "array",
+            "description": "Addresses",
+            "minItems": 0,
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Id"
+                },
+                "countryId": {
+                  "type": "string",
+                  "description": "Country Id"
+                },
+                "addressLine1": {
+                  "type": "string",
+                  "description": "Address line 1"
+                },
+                "addressLine2": {
+                  "type": "string",
+                  "description": "Address line 2"
+                },
+                "city": {
+                  "type": "string",
+                  "description": "City"
+                },
+                "region": {
+                  "type": "string",
+                  "description": "Region"
+                },
+                "postalCode": {
+                  "type": "string",
+                  "description": "Postal Code"
+                },
+                "addressTypeId": {
+                  "type": "string",
+                  "description": "Address Type Id"
+                },
+                "primaryAddress": {
+                  "type": "boolean",
+                  "description": "Is primary address"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "preferredContactTypeId": {
+            "type": "string",
+            "description": "Preferred contact type Id"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "lastName"
+        ]
+      },
+      "enrollmentDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Enrollment date"
+      },
+      "expirationDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Expiration date"
+      },
+      "createdDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Created date"
+      },
+      "updatedDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Updated date"
+      },
+      "metadata": {
+        "$ref": "metadata.json#/metadata",
+        "readonly": true
+      },
+      "tags": {
+        "type": "object",
+        "$ref": "tags.json#/tags"
+      },
+      "customFields" : {
+        "description": "Object that contains custom field",
+        "type": "object",
+        "additionalProperties": true
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+    ]
+  }
+}

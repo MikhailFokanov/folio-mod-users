@@ -1,0 +1,480 @@
+swagger: '2.0' #version of Swagger
+info: # High Level information of API
+  description: BlUsers Swagger API #Give the description of API
+  version: 1.0.0 #API version
+  title: Swagger Users # API title
+  license: #Swagger license info
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: localhost # Host Name
+basePath: / #Basepath when there are multiple versions of API running
+tags: # Tag information for each API operation. Multiple tags for multiple API operation
+  - name: user #Tag name
+    description: Everything about your BlUsers #Tag description of API operation
+schemes:
+  - http #security schemes
+paths:
+  /bl-users:
+    get: #Request method type, GET,POST etc.
+      summary: Get a number of user #Summary
+      description: Get a number of user (and possibly related) records based on criteria in the user and related modules
+      operationId: getBlUsers #Method name
+      produces:
+        - application/json #Response content type
+      parameters:
+        - in: query
+          name: query
+          description: |
+            A query expressed as a CQL string
+            (see [dev.folio.org/reference/glossary#cql](https://dev.folio.org/reference/glossary#cql))
+            using valid searchable fields.
+            The first example below shows the general form of a full CQL query,
+            but those fields might not be relevant in this context.
+          required: false
+          type: string
+        - in: query
+          name: include
+          type: array
+          description: Indicates which referenced fields should be populated (de-referenced) by the service
+          required: false
+          items:
+            type: string
+        - in: query
+          name: offset
+          description: Skip over a number of elements by specifying an offset value for the query
+          type: integer
+          required: false
+          default: 0
+          minimum: 0
+          maximum: 2147483647
+        - in: query
+          name: limit
+          description: Limit the number of elements returned in the response
+          type: integer
+          required: false
+          default: 10
+          minimum: 0
+          maximum: 2147483647
+      responses: # API response
+        '200': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "compositeUserListObject.json#/compositeUserListObject"
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '403':
+          description: Access denied
+          schema:
+            type: string
+            example: "Access denied"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+  /bl-users/by-id/{id}: #Request Mapping path of REST API
+    get: #Request method type, GET,POST etc.
+      summary: Find user by ID #Summary
+      description: Returns a single BlUser #Description of API operation
+      operationId: getBlUserById #Method name
+      produces:
+        - application/json #Response content type
+      parameters:
+        - in: path #path variable
+          name: userId #Input parameter
+          description: ID of BlUser to return #description of parameter
+          required: true #Is mandatory
+          type: string #data type
+        - in: query
+          name: include
+          type: array
+          description: Indicates which referenced fields should be populated (de-referenced) by the service
+          required: false
+          items:
+            type: string
+        - in: query
+          name: expandPermissions
+          description: Whether or not to expand permissions listings
+          type: boolean
+          required: false
+          default: false
+      responses: # API response
+        '200': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "compositeUser.json#/compositeUser" #Response object details
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '403':
+          description: Access denied
+          schema:
+            type: string
+            example: "Access denied"
+        '404':
+          description: BlUser not found
+          schema:
+            type: string
+            example: "BlUser not found"
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: "errors.json#/errors"
+            example: "Unprocessable Entity"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+  /bl-users/by-username/{username}: #Request Mapping path of REST API
+    get: #Request method type, GET,POST etc.
+      summary: Find user by username #Summary
+      description: Returns a single BlUser #Description of API operation
+      operationId: getBlUserByUserName #Method name
+      produces:
+        - application/json #Response content type
+      parameters:
+        - name: username #Input parameter
+          in: path #path variable
+          description: Username of BlUser to return #description of parameter
+          required: true #Is mandatory
+          type: string #data type
+        - in: query
+          name: include
+          type: array
+          description: Indicates which referenced fields should be populated (de-referenced) by the service
+          required: false
+          items:
+            type: string
+        - in: query
+          name: expandPermissions
+          description: Whether or not to expand permissions listings
+          type: boolean
+          required: false
+          default: false
+      responses: # API response
+        '200': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "compositeUser.json#/compositeUser" #Response object details
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '403':
+          description: Access denied
+          schema:
+            type: string
+            example: "Access denied"
+        '404':
+          description: BlUser not found
+          schema:
+            type: string
+            example: "BlUser not found"
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: "errors.json#/errors"
+            example: "Unprocessable Entity"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+  /bl-users/_self: #Request Mapping path of REST API
+    get: #Request method type, GET,POST etc.
+      summary: Get a user by self reference #Summary
+      description: Returns a single BlUser #Description of API operation
+      operationId: getBlUsersSelf #Method name
+      produces:
+        - application/json #Response content type
+      parameters:
+        - in: query
+          name: include
+          type: array
+          description: Indicates which referenced fields should be populated (de-referenced) by the service
+          required: false
+          items:
+            type: string
+        - in: query
+          name: expandPermissions
+          description: Whether or not to expand permissions listings
+          type: boolean
+          required: false
+          default: false
+      responses: # API response
+        '200': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "compositeUser.json#/compositeUser" #Response object details
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '403':
+          description: Access denied
+          schema:
+            type: string
+            example: "Access denied"
+        '404':
+          description: BlUser not found
+          schema:
+            type: string
+            example: "BlUser not found"
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: "errors.json#/errors"
+            example: "Unprocessable Entity"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+  /bl-users/login: #Request Mapping path of REST API
+    post: #Request method type, GET,POST etc.
+      summary: Login a new user #Summary
+      description: Allow a new user to login and return an authtoken, along with a composite user record #Description of API operation
+      operationId: loginBlUser #Method name
+      produces:
+        - application/json #Response content type
+      consumes:
+        - application/json
+      parameters:
+        - in: query
+          name: include
+          type: array
+          description: Indicates which referenced fields should be populated (de-referenced) by the service
+          required: false
+          items:
+            type: string
+        - in: query
+          name: expandPermissions
+          description: Whether or not to expand permissions listings
+          type: boolean
+          required: false
+          default: false
+        - in: header
+          name: User-Agent
+          type: string
+          required: true
+        - in: header
+          name: X-Forwarded-For
+          type: string
+          required: true
+        - in: body
+          name: loginCredentials
+          description: Data for login
+          schema:
+            $ref: "loginCredentials.json#/loginCredentials"
+      responses: # API response
+        '201': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "compositeUser.json#/compositeUser" #Response object details
+          headers:
+            'x-okapi-token':
+              type: string
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '422':
+          description: Unprocessable Entity
+          schema:
+            type: string
+            example: "Unprocessable Entity"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+
+  /bl-users/forgotten/password:
+    post:
+      description: Called when a user has forgotten a password
+      operationId: usersForgottenPassword #Method name
+      produces:
+        - application/json #Response content type
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: indetifier
+          schema:
+            $ref: "identifier.json#/identifier"
+      responses: # API response
+        '204':
+          description: No Content
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '422':
+          description: Unprocessable Entity
+          schema:
+            type: string
+            example: "Unprocessable Entity"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+  /bl-users/forgotten/username:
+    post:
+      description: Called when a user has forgotten a username
+      operationId: usersForgottenUsername #Method name
+      produces:
+        - application/json #Response content type
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: indetifier
+          schema:
+            $ref: "identifier.json#/identifier"
+      responses: # API response
+        '204':
+          description: No Content
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '422':
+          description: Unprocessable Entity
+          schema:
+            type: string
+            example: "Unprocessable Entity"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+
+  /bl-users/settings/myprofile/password:
+    post:
+      description: Allow change password for user
+      operationId: usersSettingsMyProfilePassword #Method name
+      produces:
+        - text/plain #Response content type
+      consumes:
+        - application/json
+      parameters:
+        - in: header
+          name: User-Agent
+          type: string
+          required: true
+        - in: header
+          name: X-Forwarded-For
+          type: string
+          required: true
+        - in: body
+          name: indetifier
+          schema:
+            $ref: "updateCredentials.json#/updateCredentials"
+      responses: # API response
+        '204':
+          description: "Successful update"
+          schema:
+            type: object
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '401':
+          description: Unauthorized
+          schema:
+            type: string
+            example: "Unauthorized"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+
+  /bl-users/password-reset/link:
+    post:
+      description: Generate and send password reset link
+      operationId: sendPasswordRestLink #Method name
+      produces:
+        - application/json #Response content type
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: generateLinkRequest
+          schema:
+            $ref: "generateLinkRequest.json#/generateLinkRequest"
+      responses: # API response
+        '200':
+          description: Response fot genrated link
+          schema:
+            $ref: "generateLinkResponse.json#/generateLinkResponse"
+  /bl-users/password-reset/reset:
+    post:
+      description: Reset password
+      operationId: sendPasswordRestLink #Method name
+      consumes:
+        - application/json
+      parameters:
+        - in: header
+          name: User-Agent
+          type: string
+          required: true
+        - in: header
+          name: X-Forwarded-For
+          type: string
+          required: true
+        - in: body
+          name: passwordReset
+          schema:
+            $ref: "passwordReset.json#/passwordReset"
+      responses: # API response
+        '204':
+          description: Successful password reset
+        '422':
+          description: Unprocessable Entity
+          headers:
+            'content-type':
+              type: string
+              default: text/html
+          schema:
+            type: string
+            example: "Bad request"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+  /bl-users/password-reset/validate:
+    post:
+      description: Validate reset link
+      operationId: validatePasswordResetLink #Method name
+      responses: # API response
+        '204':
+          description: Successful link validation
+        '422':
+          description: Unprocessable Entity
+          headers:
+            'content-type':
+              type: string
+              default: text/html
+          schema:
+            type: string
+            example: "Bad request"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"

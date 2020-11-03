@@ -1,0 +1,52 @@
+{
+  "proxyFor" : {
+    "title": "ProxyFor Schema",
+    "description": "Proxy For Schema",
+    "type": "object",
+    "properties": {
+      "userId": {
+        "type": "string",
+        "description": "User Id"
+      },
+      "proxyUserId": {
+        "type": "string",
+        "description": "Proxy User Id"
+      },
+      "id": {
+        "type": "string",
+        "description": "Id"
+      },
+      "requestForSponsor": {
+        "type": "string",
+        "description": "Request For Sponsor"
+      },
+      "createdDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Created Date"
+      },
+      "notificationsTo": {
+        "type": "string",
+        "description": "Notifications To"
+      },
+      "accrueTo": {
+        "type": "string",
+        "description": "Accrue To"
+      },
+      "status": {
+        "type": "string",
+        "description": "Status"
+      },
+      "expirationDate": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Expiration Date"
+      },
+      "metadata": {
+        "$ref": "metadata.json#/metadata",
+        "readonly": true
+      }
+    },
+    "additionalProperties": false
+  }
+}

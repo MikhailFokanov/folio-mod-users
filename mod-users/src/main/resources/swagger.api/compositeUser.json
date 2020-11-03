@@ -1,0 +1,36 @@
+{
+  "compositeUser": {
+    "type": "object",
+    "description": "Composite user object",
+    "properties": {
+      "user": {
+        "$ref": "userdata.json#/user"
+      },
+      "patronGroup": {
+        "$ref": "usergroup.json#/userGroup"
+      },
+      "permissions": {
+        "$ref": "permissionUser.json#/permissionUser"
+      },
+      "credentials": {
+        "$ref": "credentials.json#/credentials"
+      },
+      "credentials": {
+        "type": "object",
+        "description": "Credentials object",
+        "$ref": "credentials.json#/credentials"
+      },
+      "proxiesFor": {
+        "type": "array",
+        "description": "Proxies for, array",
+        "id": "proxyFor",
+        "items": {
+          "$ref": "proxyfor.json#/proxyFor"
+        }
+      },
+      "servicePointsUser": {
+        "$ref": "servicepointsexpandeduser.json#/servicePointsExpandedUser"
+      }
+    }
+  }
+}

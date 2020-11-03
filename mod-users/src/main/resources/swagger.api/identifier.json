@@ -1,0 +1,12 @@
+{
+  "identifier": {
+    "type": "object",
+    "description": "Notification",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Id"
+      }
+    }
+  }
+}

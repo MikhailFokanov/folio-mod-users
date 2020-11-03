@@ -1,0 +1,236 @@
+swagger: '2.0' #version of Swagger
+info: # High Level information of API
+  description: Proxies For Swagger API #Give the description of API
+  version: 1.0.0 #API version
+  title: Swagger Proxies For # API title
+  license: #Swagger license info
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: localhost # Host Name
+basePath: / #Basepath when there are multiple versions of API running
+tags: # Tag information for each API operation. Multiple tags for multiple API operation
+  - name: proxiesFor #Tag name
+    description: Everything about your Proxies For #Tag description of API operation
+schemes:
+  - http #security schemes
+paths:
+  /proxiesfor:
+    get: #Request method type, GET,POST etc.
+      description: Return a list of all proxy relationships
+      operationId: getProxiesFor #Method name
+      produces:
+        - application/json #Response content type
+      parameters:
+        - in: query
+          name: query
+          description: |
+            A query expressed as a CQL string
+            (see [dev.folio.org/reference/glossary#cql](https://dev.folio.org/reference/glossary#cql))
+            using valid searchable fields.
+            The first example below shows the general form of a full CQL query,
+            but those fields might not be relevant in this context.
+          required: false
+          type: string
+        - in: query
+          name: offset
+          description: Skip over a number of elements by specifying an offset value for the query
+          type: integer
+          required: false
+          default: 0
+          minimum: 0
+          maximum: 2147483647
+        - in: query
+          name: limit
+          description: Limit the number of elements returned in the response
+          type: integer
+          required: false
+          default: 10
+          minimum: 0
+          maximum: 2147483647
+        - in: query
+          name: lang
+          description: Requested language. Optional. [lang=en]
+          default: en
+          type: string
+          required: false
+          pattern: "[a-zA-Z]{2}"
+      responses: # API response
+        '200': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "proxyforCollection.json#/proxyforCollection"
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '401':
+          description: "Not authorized to perform requested action"
+          schema:
+            type: string
+            example: "Not authorized to perform requested action"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+
+    post:
+      description: Create a proxyFor relationship
+      operationId: postProxiesFor #Method name
+      produces:
+        - application/json #Response content type
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: proxyFor
+          description: Data for login
+          schema:
+            $ref: "proxyfor.json#/proxyFor"
+        - in: query
+          name: lang
+          description: Requested language. Optional. [lang=en]
+          default: en
+          type: string
+          required: false
+          pattern: "[a-zA-Z]{2}"
+      responses: # API response
+        '200': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "proxyfor.json#/proxyFor"
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '401':
+          description: "Not authorized to perform requested action"
+          schema:
+            type: string
+            example: "Not authorized to perform requested action"
+        '422':
+          description: Unprocessable Entity
+          schema:
+            $ref: "errors.json#/errors"
+            example: "Unprocessable Entity"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+
+  /proxiesfor/{id}:
+    get: #Request method type, GET,POST etc.
+      description: Get a single proxyFor
+      operationId: getProxyForById #Method name
+      produces:
+        - application/json #Response content type
+      parameters:
+        - in: path #path variable
+          name: id #Input parameter
+          description: Id field of ProxyFor #description of parameter
+          required: true #Is mandatory
+          type: string #data type-
+        - in: query
+          name: lang
+          description: Requested language. Optional. [lang=en]
+          default: en
+          type: string
+          required: false
+          pattern: "[a-zA-Z]{2}"
+      responses: # API response
+        '200': #Successful status code
+          description: successful operation #Successful status description
+          schema:
+            $ref: "proxyfor.json#/proxyFor"
+        '404':
+          description: "Item with a given ID not found"
+          schema:
+            type: string
+            example: "Item with a given ID not found"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+    delete:
+      description: Delete a single proxyFor
+      operationId: deleteProxyForById #Method name
+      produces:
+        - application/json #Response content type
+      parameters:
+        - in: path #path variable
+          name: id #Input parameter
+          description: Id field of ProxyFor #description of parameter
+          required: true #Is mandatory
+          type: string #data type-
+        - in: query
+          name: lang
+          description: Requested language. Optional. [lang=en]
+          default: en
+          type: string
+          required: false
+          pattern: "[a-zA-Z]{2}"
+      responses: # API response
+        '204':
+          description: "Item deleted successfully"
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '404':
+          description: "Item with a given ID not found"
+          schema:
+            type: string
+            example: "Item with a given ID not found"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"
+    put:
+      description: Update a single proxyFor
+      operationId: putProxyForById #Method name
+      produces:
+        - application/json #Response content type
+      consumes:
+        - application/json
+      parameters:
+        - in: path #path variable
+          name: id #Input parameter
+          description: Id field of ProxyFor #description of parameter
+          required: true #Is mandatory
+          type: string #data type-
+        - in: body
+          name: proxyFor
+          description: Data for login
+          schema:
+            $ref: "proxyfor.json#/proxyFor"
+        - in: query
+          name: lang
+          description: Requested language. Optional. [lang=en]
+          default: en
+          type: string
+          required: false
+          pattern: "[a-zA-Z]{2}"
+      responses: # API response
+        '204':
+          description: "Item successfully updated"
+        '400':
+          description: Bad request
+          schema:
+            type: string
+            example: "Bad request"
+        '404':
+          description: "Item with a given ID not found"
+          schema:
+            type: string
+            example: "Item with a given ID not found"
+        '500':
+          description: Internal server error
+          schema:
+            type: string
+            example: "Internal server error"

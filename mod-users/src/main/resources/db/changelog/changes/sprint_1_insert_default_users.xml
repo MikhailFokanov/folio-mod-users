@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Olekasndr Dekin" id="insert_default_users">
+        <insert tableName="users" schemaName="diku_mod_users_poc">
+            <column name="username" value="Alex"/>
+            <column name="barcode" value="10101"/>
+            <column name="active" value="true"/>
+            <column name="enrollment_date" value="2018-09-22T00:00:00.000+0000"/>
+            <column name="created_date" value="2018-09-22T00:00:00.000+0000"/>
+            <column name="lastname" value="Oleksandr"/>
+            <column name="firstname" value="Oleksandr"/>
+            <column name="email" value="Dek@gmail.com"/>
+            <column name="phone" value="09312312312"/>
+            <column name="date_of_birth" value="1989-08-21T00:00:00.000+0000"/>
+            <column name="type" value="patron"/>
+        </insert>
+        <insert tableName="users" schemaName="diku_mod_users_poc">
+            <column name="username" value="Oleh"/>
+            <column name="barcode" value="20202"/>
+            <column name="active" value="true"/>
+            <column name="enrollment_date" value="2018-09-22T00:00:00.000+0000"/>
+            <column name="created_date" value="2018-09-22T00:00:00.000+0000"/>
+            <column name="lastname" value="Oleh"/>
+            <column name="firstname" value="Oleh"/>
+            <column name="email" value="Oleh@gmail.com"/>
+            <column name="phone" value="0931112131"/>
+            <column name="date_of_birth" value="1989-08-21T00:00:00.000+0000"/>
+            <column name="type" value="patron"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

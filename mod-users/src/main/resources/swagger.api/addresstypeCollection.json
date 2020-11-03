@@ -1,0 +1,24 @@
+{
+  "addresstypeCollection" : {
+    "type": "object",
+    "description": "Collection of address types",
+    "properties": {
+      "addressTypes": {
+        "description": "List of address type items",
+        "type": "array",
+        "id": "addressType",
+        "items": {
+          "type": "object",
+          "$ref": "addresstype.json#/addresstype"
+        }
+      },
+      "totalRecords": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "addressTypes",
+      "totalRecords"
+    ]
+  }
+}
